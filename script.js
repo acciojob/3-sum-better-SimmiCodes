@@ -1,29 +1,29 @@
-function threeSumClosest(S, target) {
-  S.sort((a, b) => a - b);
+function findClosestSum(nums, target) {
+ nums.sort((a, b) => a - b);
+ let closestSum = Infinity;
 
-  let closestSum = Infinity;
-  let closestDiff = Infinity;
-
-  for (let i = 0; i < S.length - 2; i++) {
+ for (let i = 0; i < nums.length - 2; i++) {
     let left = i + 1;
-    let right = S.length - 1;
+    let right = nums.length - 1;
 
     while (left < right) {
-      const sum = S[i] + S[left] + S[right];
-      const diff = Math.abs(target - sum);
+      let sum = nums[i] + nums[left] + nums[right];
 
-      if (diff < closestDiff) {
+      if (Math.abs(sum - target) < Math.abs(closestSum - target)) {
         closestSum = sum;
-        closestDiff = diff;
       }
 
-      if (sum < target) {
+      if (sum <= target) {
         left++;
       } else {
         right--;
       }
     }
-  }
+ }
 
-  return closestSum;
+ return closestSum;
 }
+
+let nums = [1, 2, 3, 4, 5];
+let target = 10;
+console.log(findClosestSum(nums, target));
