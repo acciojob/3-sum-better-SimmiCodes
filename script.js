@@ -1,26 +1,27 @@
-function threeSumClosest(nums, target) {
-    nums.sort((a, b) => a - b); 
-    let closestSum = Infinity;
+var threeSumClosest = function (nums, target) {
+  
+    nums.sort((a, b) => a - b);
     
-    for (let i = 0; i < nums.length - 2; i++) {
-        let left = i + 1;
-        let right = nums.length - 1;
+    const n = nums.length;
+    
+    let closest = nums[0] + nums[1] + nums[n - 1];
+  
+    for (let i = 0; i < n - 2; i++) {
         
-        while (left < right) {
-            const currentSum = nums[i] + nums[left] + nums[right];
-            
-            if (Math.abs(currentSum - target) < Math.abs(closestSum - target)) {
-                closestSum = currentSum;
-            }
-            
-            if (currentSum < target) {
-                left++;
+        let j = i + 1;
+        let k = n - 1;
+        
+        while (j < k) {
+            let sum = nums[i] + nums[j] + nums[k];
+            if (sum <= target) {
+                j++;
             } else {
-                right--;
+                k--;
+            }
+            if (Math.abs(closest - target) > Math.abs(sum - target)) {
+                closest = sum;
             }
         }
     }
-    
-    return closestSum;
-}
-
+    return closest;
+};
