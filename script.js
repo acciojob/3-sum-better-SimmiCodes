@@ -1,25 +1,27 @@
-function threeSum(nums, target) {
-    console.log(`Input: ${nums}, Target: ${target}`);
-    nums.sort((a, b) => a - b);
-    console.log(`Sorted array: ${nums}`);
-    let result = nums[0] + nums[1] + nums[2];
-    console.log(`Initial result: ${result}`);
-    for (let i = 0; i < nums.length - 2; i++) {
-        let j = i + 1;
-        let k = nums.length - 1;
-        while (j < k) {
-            let sum = nums[i] + nums[j] + nums[k];
-            console.log(`i: ${i}, j: ${j}, k: ${k}, sum: ${sum}, result: ${result}`);
-            if (Math.abs(target - sum) < Math.abs(target - result)) {
-                result = sum;
+function threeSum(arr, target) {
+    arr.sort((a, b) => a - b); // Sort the array in ascending order
+    let closestSum = Infinity;
+
+    for (let i = 0; i < arr.length - 2; i++) {
+        let left = i + 1;
+        let right = arr.length - 1;
+
+        while (left < right) {
+            const sum = arr[i] + arr[left] + arr[right];
+
+            if (Math.abs(sum - target) < Math.abs(closestSum - target)) {
+                closestSum = sum;
             }
-            if (sum <= target) {
-                j++;
+
+            if (sum < target) {
+                left++;
             } else {
-                k--;
+                right--;
             }
         }
     }
-    console.log(`Final result: ${result}`);
-    return result;
+
+    return closestSum;
 }
+
+module.exports = threeSum;
