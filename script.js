@@ -1,6 +1,9 @@
 function threeSum(nums, target) {
+    console.log(`Input: ${nums}, Target: ${target}`);
     nums.sort((a, b) => a - b);
+    console.log(`Sorted array: ${nums}`);
     let result = nums[0] + nums[1] + nums[2];
+    console.log(`Initial result: ${result}`);
     for (let i = 0; i < nums.length - 2; i++) {
         let j = i + 1;
         let k = nums.length - 1;
@@ -17,5 +20,6 @@ function threeSum(nums, target) {
             }
         }
     }
+    console.log(`Final result: ${result}`);
     return result;
 }
